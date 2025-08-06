@@ -8,16 +8,25 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 from src.utils import *
 from src.inference  import extract_answer_only
+from huggingface_hub import login
 
 #set device type
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
+
+login(token="")
 
 if __name__ == "__main__":
     # Load test data
     test = pd.read_csv('./data/test.csv')
 
     # Define the model name
+
+    # mistralai/Mistral-7B-v0.1
+    # meta-llama/Meta-Llama-3-8B
+    # beomi/KoAlpaca-Polyglot-5.8B : 0.19
+    #model_name = "mistralai/Mistral-7B-v0.1"
+
     model_name = "openai/gpt-oss-20b"
 
     # Tokenizer 및 모델 로드 (4bit)
